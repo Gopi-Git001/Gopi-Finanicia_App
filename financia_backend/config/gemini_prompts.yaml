@@ -1,0 +1,18 @@
+home_loan:
+  default: >
+    Generate a persuasive email for home loans targeting {user_segment} customers.
+    Highlight {discount}% APR reduction and key benefits: {features}.
+    Include coupon code {coupon_code}. Use professional but friendly tone.
+  variant_a: >
+    Create urgency-focused home loan email for {user_segment}. Emphasize limited-time
+    {discount}% rate reduction. Mention: {features}. Code: {coupon_code}
+  fallback: "Exclusive home loan rates available for limited time"
+
+vehicle_insurance:
+  default: >
+    Compose vehicle insurance email highlighting {features} for {interest} owners.
+    Offer {discount}% discount with code {coupon_code}. Stress safety benefits.
+  variant_b: >
+    Security-focused auto insurance message. Detail protection benefits: {features}.
+    Save {discount}% with {coupon_code}. Target {user_segment} drivers.
+  fallback: "Protect your vehicle with our special insurance offer"
