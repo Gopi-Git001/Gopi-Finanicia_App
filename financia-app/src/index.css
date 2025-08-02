@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Swiss Design System - Clean, minimal, high contrast */
+
+@layer base {
+  :root {
+    /* Swiss Design Colors - Off-white, black, sky blue accent */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
+
+    --primary: 0 0% 8%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 199 89% 48%;
+
+    --radius: 0.75rem;
+
+    /* Swiss Design Custom Properties */
+    --swiss-spacing: 2rem;
+    --swiss-spacing-lg: 4rem;
+    --swiss-spacing-xl: 6rem;
+    
+    /* Subtle shadows for cards */
+    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-card-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    
+    /* Animation timings */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+    line-height: 1.6;
+  }
+
+  /* Swiss Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+    line-height: 1.2;
+  }
+
+  h1 { @apply text-4xl md:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+  h5 { @apply text-lg md:text-xl; }
+  h6 { @apply text-base md:text-lg; }
+}
+
+@layer components {
+  /* Swiss Card Component */
+  .swiss-card {
+    @apply bg-card border border-border rounded-xl p-6;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+
+  .swiss-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  /* Swiss Button Variants */
+  .btn-swiss-primary {
+    @apply bg-primary text-primary-foreground px-8 py-3 rounded-lg font-medium;
+    transition: var(--transition-fast);
+  }
+
+  .btn-swiss-primary:hover {
+    @apply bg-primary/90;
+    transform: translateY(-1px);
+  }
+
+  .btn-swiss-secondary {
+    @apply bg-secondary text-secondary-foreground border border-border px-8 py-3 rounded-lg font-medium;
+    transition: var(--transition-fast);
+  }
+
+  .btn-swiss-secondary:hover {
+    @apply bg-secondary/80;
+    transform: translateY(-1px);
+  }
+
+  .btn-swiss-accent {
+    @apply bg-accent text-accent-foreground px-8 py-3 rounded-lg font-medium;
+    transition: var(--transition-fast);
+  }
+
+  .btn-swiss-accent:hover {
+    @apply bg-accent/90;
+    transform: translateY(-1px);
+  }
+
+  /* Swiss Spacing Utilities */
+  .swiss-spacing { padding: var(--swiss-spacing); }
+  .swiss-spacing-lg { padding: var(--swiss-spacing-lg); }
+  .swiss-spacing-xl { padding: var(--swiss-spacing-xl); }
+
+  /* Swiss Layout Components */
+  .swiss-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .swiss-grid {
+    @apply grid gap-6 md:gap-8;
+  }
+
+  .swiss-grid-2 { @apply grid-cols-1 md:grid-cols-2; }
+  .swiss-grid-3 { @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3; }
+  .swiss-grid-4 { @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-4; }
+
+  /* Navigation Underline Animation */
+  .nav-link {
+    @apply relative inline-block transition-colors duration-200;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 transition-transform duration-200 origin-left;
+    content: '';
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply scale-x-100;
+  }
+
+  /* Form Elements */
+  .swiss-input {
+    @apply w-full px-4 py-3 bg-background border border-border rounded-lg;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
+    transition: var(--transition-fast);
+  }
+
+  .swiss-textarea {
+    @apply w-full px-4 py-3 bg-background border border-border rounded-lg resize-none min-h-[120px];
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
+    transition: var(--transition-fast);
+  }
+
+  /* Loading States */
+  .loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Swiss Section Spacing */
+  .swiss-section {
+    @apply py-16 md:py-24;
+  }
+
+  .swiss-section-lg {
+    @apply py-20 md:py-32;
+  }
+}
