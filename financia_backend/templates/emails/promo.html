@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ subject }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Reset & basics */
+    body,table,td,a{ -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+    table,td{ mso-table-lspace:0pt; mso-table-rspace:0pt; }
+    img{ -ms-interpolation-mode:bicubic; }
+    body{ margin:0; padding:0; width:100%!important; height:100%!important; background:#f7f9fc; }
+    a[x-apple-data-detectors]{ color:inherit!important; text-decoration:none!important; }
+
+    /* Container */
+    .email-wrapper{ width:100%; background:#f7f9fc; padding:20px 0; }
+    .email-content{ max-width:600px; margin:0 auto; background:#FFFFFF; border-radius:8px; overflow:hidden; }
+
+    /* Header */
+    .email-header{ background:linear-gradient(135deg,#6a11cb 0%,#2575fc 100%); text-align:center; padding:30px 20px; }
+    .email-header h1{ color:#ffffff; font-family:Arial, sans-serif; font-size:28px; margin:0; }
+
+    /* Body */
+    .email-body{ padding:30px 20px; font-family:Arial, sans-serif; color:#333333; line-height:1.6; }
+    .greeting{ font-size:18px; margin-bottom:20px; }
+    .content p{ margin:0 0 15px; }
+
+    /* Offer card */
+    .offer-card{ background:#f8faff; border:1px solid #e0e7ff; border-radius:8px; padding:20px; margin:30px 0; }
+    .offer-card h2{ margin-top:0; font-size:22px; color:#2563eb; font-family:Arial, sans-serif; }
+    .offer-card p{ margin:0 0 15px; }
+    .offer-card img{ max-width:100%; border-radius:6px; display:block; margin:15px 0; }
+    .promo-code{ background:#fff9db; border-left:4px solid #f59f00; padding:10px 15px; margin-bottom:15px; font-weight:bold; }
+
+    /* CTA */
+    .button{ display:inline-block; background:linear-gradient(135deg,#6a11cb 0%,#2575fc 100%); color:#ffffff!important; text-decoration:none; padding:12px 30px; border-radius:30px; font-weight:600; font-family:Arial, sans-serif; }
+    @media screen and (max-width:600px){
+      .email-body{ padding:20px; }
+      .button{ display:block!important; width:100%!important; text-align:center; }
+    }
+
+    /* Footer */
+    .email-footer{ background:#f1f5f9; text-align:center; padding:20px; font-size:12px; color:#64748b; font-family:Arial, sans-serif; }
+    .email-footer a{ color:#64748b; text-decoration:underline; }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-content">
+      <!-- Header -->
+      <div class="email-header">
+        <h1>Financia</h1>
+      </div>
+
+      <!-- Body -->
+      <div class="email-body">
+        <div class="greeting">
+          Hi {{ user.first_name|default:"Valued Customer" }},
+        </div>
+
+        <div class="content">
+          {{ ai_body|linebreaksbr|safe }}
+        </div>
+
+        {% if offer %}
+        <div class="offer-card">
+          <h2>{{ offer.title }}</h2>
+          {% if offer.image %}
+          <img src="{{ offer.image.url }}" alt="{{ offer.title }}">
+          {% endif %}
+          <p>{{ offer.description|safe }}</p>
+          {% if offer.promo_code %}
+          <div class="promo-code">
+            Use promo code: <strong>{{ offer.promo_code }}</strong>
+          </div>
+          {% endif %}
+          <p><strong>Offer expires:</strong> {{ offer.expiration|date:"F j, Y" }}</p>
+          <a href="{{ site_url }}/claim-offer/{{ offer.id }}?user={{ user.id }}" class="button">
+            Claim This Offer
+          </a>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Footer -->
+      <div class="email-footer">
+        <p>Financia &copy; {{ current_date|date:"Y" }}. All rights reserved.</p>
+        <p>
+          <a href="{{ unsubscribe_link }}">Unsubscribe from promotional emails</a>
+        </p>
+        <img src="{{ tracking_pixel }}" width="1" height="1" alt="" style="display:block;margin:0 auto;">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

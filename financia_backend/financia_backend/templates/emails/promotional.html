@@ -1,0 +1,170 @@
+<!-- templates/emails/promotional.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ subject }}</title>
+  <style>
+    /* Modern email styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .email-header {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .email-header h1 {
+      color: white;
+      margin: 0;
+      font-size: 28px;
+    }
+    .email-body {
+      padding: 30px;
+    }
+    .greeting {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .content {
+      margin-bottom: 30px;
+    }
+    .offer-card {
+      border: 1px solid #e0e7ff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 25px 0;
+      background: #f8faff;
+    }
+    .offer-title {
+      font-size: 22px;
+      color: #2563eb;
+      margin-top: 0;
+    }
+    .offer-image {
+      max-width: 100%;
+      border-radius: 6px;
+      margin: 15px 0;
+    }
+    .offer-description {
+      margin-bottom: 20px;
+    }
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white !important;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+    }
+    .promo-code {
+      background: #fff9db;
+      border-left: 4px solid #f59f00;
+      padding: 10px 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .email-footer {
+      background: #f1f5f9;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+    }
+    .unsubscribe-link {
+      color: #64748b;
+      text-decoration: underline;
+      margin-top: 10px;
+      display: inline-block;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 600px) {
+      .email-body {
+        padding: 20px;
+      }
+      .email-header h1 {
+        font-size: 24px;
+      }
+      .offer-title {
+        font-size: 20px;
+      }
+      .cta-button {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="email-header">
+      <h1>Financia</h1>
+    </div>
+    
+    <div class="email-body">
+      <div class="greeting">
+        <p>Hi {{ user.first_name|default:"Valued Customer" }},</p>
+      </div>
+      
+      <div class="content">
+        <!-- AI-generated content section -->
+        {{ ai_body|safe }}
+      </div>
+      
+      {% if offer %}
+      <div class="offer-card">
+        <h2 class="offer-title">{{ offer.title }}</h2>
+        
+        {% if offer.image %}
+        <img src="{{ offer.image.url }}" alt="{{ offer.title }}" class="offer-image">
+        {% endif %}
+        
+        <div class="offer-description">
+          {{ offer.description|safe }}
+        </div>
+        
+        {% if offer.promo_code %}
+        <div class="promo-code">
+          Use promo code: <strong>{{ offer.promo_code }}</strong>
+        </div>
+        {% endif %}
+        
+        <p><strong>Offer expires:</strong> {{ offer.expiration|date:"F j, Y" }}</p>
+        
+        <a href="https://yourdomain.com/claim-offer/{{ offer.id }}?user={{ user.id }}" class="cta-button">
+          Claim This Offer
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    
+    <div class="email-footer">
+      <p>Financia &copy; {{ current_date|date:"Y" }}. All rights reserved.</p>
+      <a href="{{ unsubscribe_link }}" class="unsubscribe-link">
+        Unsubscribe from promotional emails
+      </a>
+      <img src="{{ tracking_pixel }}" width="1" height="1" alt="tracker">
+    </div>
+  </div>
+</body>
+</html>

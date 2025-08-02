@@ -1,0 +1,20 @@
+[
+  {
+    "policy_id": "policy_insurance_001",
+    "title": "Auto Insurance Coverage",
+    "dept": "Insurance",
+    "chunk_index": 0
+  },
+  {
+    "policy_id": "policy_loan_001",
+    "title": "Personal Loan Terms",
+    "dept": "Loans",
+    "chunk_index": 0
+  },
+  {
+    "policy_id": "policy_credit_001",
+    "title": "Credit Card Rewards Program",
+    "dept": "Credit",
+    "chunk_index": 0
+  }
+]
